@@ -36,3 +36,4 @@ Stack.prototype.toString = function size() {
   string += ' ]';
   return console.log(string);
 };
+
