@@ -22,3 +22,7 @@
 [MIT Intro to Algo 2](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-introduction-to-algorithms-sma-5503-fall-2005/video-lectures/)
 
 [MIT Python Software](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/lecture-videos/lecture-5-tuples-lists-aliasing-mutability-and-cloning/)
+
+[City University of New York](http://www.cs.csi.cuny.edu/~zelikovi/)
+
+[POSTFIX to INFIX](http://www.cs.csi.cuny.edu/~zelikovi/csc326/data/assignment5.htm)
