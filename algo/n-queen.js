@@ -53,11 +53,24 @@ function solveNQueen(numOfQueens, currentRow, positions) {
 
     // loops through each previous queen
     for (let queen = 1; queen < currentRow; queen++) {
+
+    // Queen at (1,5) can attack -> every one at 1st row
+    //                           -> every on at 5th column
+    //                           -> (2,6), (3,7), (4,8) // forward diagonal attack (+1 row, +1 column) till we reach end of row and column
+    //                           -> (2,4), (3,3), (4,2), (5,1) // backward diagonal attack (-1 row, -1 column) till we reach end of row and column
+
+    // Queen at (3,3) can attack -> every one at 3rd row
+    //                           -> every on at 3rd column
+    //                           -> (4,4), (5,5), (6,6), (7,7), (8,8)
+    //                           -> (2,2), (1,1)
+
+
       //if a previous queen is on the same column
       if (positions[queen].column === col) {
         isSafe = false;
         break;
       }
+      // this is a shorcut trick to evaluate if queen is safe... :P
       // if prev quuen row - prev queen col = curr quuen row - curr queen col
       if (positions[queen].row - positions[queen].column === currentRow - col) {
         isSafe = false;
