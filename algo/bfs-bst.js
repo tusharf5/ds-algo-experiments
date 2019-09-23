@@ -47,6 +47,8 @@ BSTNode.prototype.find = function(value) {
 }
 
 BSTNode.prototype.traverseBFS = function() {
+  Array.prototype.enqueue = Array.prototype.push;
+  Array.prototype.dequeue = Array.prototype.shift;
   let queue = [];
   let str = '';
   queue.push(this);
@@ -58,6 +60,29 @@ BSTNode.prototype.traverseBFS = function() {
     current.rightChild && queue.enqueue(current.rightChild);
   }
   console.log(str);
+};
+
+
+// the logic is traverse one of the node back to root and store a hashmap of the node
+// in its path.
+// while traversing the nodeB back to root on every jump to a prent check if that parent was present in the
+// path of nodeA by using that hashmap.
+// Todo Recusrive Implementation
+BST.prototype.lowestCommonAncestor = function(nodeA, nodeB) {
+  let parent = nodeA.parent;
+  const hash = {};
+  while (parent) {
+    hash[parent.value] = parent;
+    parent = parent.parent;
+  }
+  let secondParent = nodeB.parent;
+  while (secondParent) {
+    if (hash[secondParent.value]) {
+      return hash[secondParent.value].value;
+    }
+    secondParent = secondParent.parent;
+  }
+  return null;
 };
 
 
