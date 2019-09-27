@@ -26,3 +26,6 @@
 [City University of New York](http://www.cs.csi.cuny.edu/~zelikovi/)
 
 [POSTFIX to INFIX](http://www.cs.csi.cuny.edu/~zelikovi/csc326/data/assignment5.htm)
+
+
+Write a function that generates all possible combinations of 1 and 0 for n bits. For example, if the function receives 2 as the number of bits, it should produce the following 4 combinations: 00,01,10,11. You cannot use any mathematical operators.

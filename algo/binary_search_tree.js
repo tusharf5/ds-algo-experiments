@@ -9,27 +9,24 @@ function BSTNode(value) {
 Array.prototype.enqueue = Array.prototype.push;
 Array.prototype.dequeue = Array.prototype.shift;
 
-
 BSTNode.prototype.find = function(value) {
-
   // CONTROL FLOW
   // if value === current value
-    // if yes stop and return
+  // if yes stop and return
   // if value is less than current value
-    // if a right node exists
-      // then let the right node manage this
-    // otherwise if a right node doesnt exist
-      // return not found
+  // if a right node exists
+  // then let the right node manage this
+  // otherwise if a right node doesnt exist
+  // return not found
   // if value is greater than current value
-    // if a left node exists
-      // then let the left node manage this
-    // otherwise if a left node doesnt exist
-      // return not found
+  // if a left node exists
+  // then let the left node manage this
+  // otherwise if a left node doesnt exist
+  // return not found
 
-
-   if (this.value === value) {
+  if (this.value === value) {
     return this;
-   } else if (value > this.value) {
+  } else if (value > this.value) {
     if (this.rightChild) {
       return this.rightChild.find(value);
     } else {
@@ -42,9 +39,7 @@ BSTNode.prototype.find = function(value) {
       return null;
     }
   }
-
-
-}
+};
 
 BSTNode.prototype.traverseBFS = function() {
   Array.prototype.enqueue = Array.prototype.push;
@@ -53,7 +48,7 @@ BSTNode.prototype.traverseBFS = function() {
   let str = '';
   queue.push(this);
   while (queue.length !== 0) {
-    // console.log(queue.map(n => n.value)); // enable for debug 
+    // console.log(queue.map(n => n.value)); // enable for debug
     const current = queue.dequeue();
     str += ' ' + current.value + '';
     current.leftChild && queue.enqueue(current.leftChild);
@@ -62,6 +57,33 @@ BSTNode.prototype.traverseBFS = function() {
   console.log(str);
 };
 
+//todo ancestor
+//todo predecessor
+//todo distance between two
+//todo check if complete
+//todo check if full
+//todo check if perfect
+//todo check if balanced
+
+BSTNode.prototype.height = function() {
+  let heightLeft;
+  let heightRight;
+  if (!this.leftChild) {
+    heightLeft = 0;
+  }
+  if (!this.rightChild) {
+    heightRight = 0;
+  }
+  if (this.leftChild) {
+    // when we are coming back from calculating the height we simply add 1 to it
+    // classic recursion case
+    heightLeft = 1 + this.leftChild.height();
+  }
+  if (this.rightChild) {
+    heightRight = 1 + this.rightChild.height();
+  }
+  return Math.max(heightLeft, heightRight);
+};
 
 // the logic is traverse one of the node back to root and store a hashmap of the node
 // in its path.
@@ -85,7 +107,6 @@ BST.prototype.lowestCommonAncestor = function(nodeA, nodeB) {
   return null;
 };
 
-
 BSTNode.prototype.reverseTraverseBFS = function() {
   let queue = [];
   const stack = [];
@@ -99,83 +120,82 @@ BSTNode.prototype.reverseTraverseBFS = function() {
   }
 
   let str = '';
-  while(stack.length !== 0) {
+  while (stack.length !== 0) {
     let val = stack.pop();
     str += val;
   }
   console.log(str);
-  
 };
-
-
 
 BSTNode.prototype.compare = function(node) {
   // check value of this node === argument node
-    // if not match return false
+  // if not match return false
   // check if this node has a leftChild and argument node too
-    // if both dont have a leftChild return false
-    // if both have then ask the leftchild node to compare with the left child of argument node
+  // if both dont have a leftChild return false
+  // if both have then ask the leftchild node to compare with the left child of argument node
   // check if this node has a rightChild and argument node too
-    // if both dont have a rightChild return false
-    // if both have then ask the rightchild node to compare with the right child of argument node
+  // if both dont have a rightChild return false
+  // if both have then ask the rightchild node to compare with the right child of argument node
 
-   let isEqual = true;
-   // checking the center node values are same
-   if (this.value !== node.value) {
-     isEqual = false;
-   }
-   if(!isEqual) {
-     return isEqual;
-   }
+  let isEqual = true;
+  // checking the center node values are same
+  if (this.value !== node.value) {
+    isEqual = false;
+  }
+  if (!isEqual) {
+    return isEqual;
+  }
 
-   // checking if both dont have a left child
-   if(!this.leftChild && !node.leftChild) {
-     isEqual = true;
-   }
+  // checking if both dont have a left child
+  if (!this.leftChild && !node.leftChild) {
+    isEqual = true;
+  }
 
-   // checking if both has a left child (recursive)
-   if(this.leftChild && node.leftChild) {
-     isEqual = this.leftChild.compare(node.leftChild);
-   }
+  // checking if both has a left child (recursive)
+  if (this.leftChild && node.leftChild) {
+    isEqual = this.leftChild.compare(node.leftChild);
+  }
 
-   if(!isEqual) {
-     return isEqual;
-   }
-
-  // if one of them has a left and other doesnt
-   if((this.leftChild && !node.leftChild) || (!this.leftChild && node.leftChild)) {
-     isEqual = false;
-   }
-
-   if(!isEqual) {
-     return isEqual;
-   }
-
-
-   // checking if both dont have a left child
-   if(!this.rightChild && !node.rightChild) {
-     isEqual = true;
-   }
-
-   // checking if both has a left child (recursive)
-   if(this.rightChild && node.rightChild) {
-     isEqual = this.rightChild.compare(node.rightChild);
-   }
-
-   if(!isEqual) {
-     return isEqual;
-   }
+  if (!isEqual) {
+    return isEqual;
+  }
 
   // if one of them has a left and other doesnt
-   if((this.rightChild && !node.rightChild) || (!this.rightChild && node.rightChild)) {
-     isEqual = false;
-   }
+  if (
+    (this.leftChild && !node.leftChild) ||
+    (!this.leftChild && node.leftChild)
+  ) {
+    isEqual = false;
+  }
 
-  
-   return isEqual;
+  if (!isEqual) {
+    return isEqual;
+  }
 
+  // checking if both dont have a left child
+  if (!this.rightChild && !node.rightChild) {
+    isEqual = true;
+  }
+
+  // checking if both has a left child (recursive)
+  if (this.rightChild && node.rightChild) {
+    isEqual = this.rightChild.compare(node.rightChild);
+  }
+
+  if (!isEqual) {
+    return isEqual;
+  }
+
+  // if one of them has a left and other doesnt
+  if (
+    (this.rightChild && !node.rightChild) ||
+    (!this.rightChild && node.rightChild)
+  ) {
+    isEqual = false;
+  }
+
+  return isEqual;
 };
-
 
 BSTNode.compareSmaller = function(nodea, nodeb) {
   let isEqual = true;
@@ -202,29 +222,26 @@ BSTNode.compareSmaller = function(nodea, nodeb) {
   return isEqual;
 };
 
-
-
 BSTNode.prototype.inOrderTraverse = function() {
   // what's the base condition, if there are no child nodes
   // then the recursive function won't be called
-  if(this.leftChild) {
+  if (this.leftChild) {
     this.leftChild.inOrderTraverse();
   }
   console.log(this.value);
-  if(this.rightChild) {
+  if (this.rightChild) {
     this.rightChild.inOrderTraverse();
   }
 };
 
-
 BSTNode.prototype.preOrderTraverse = function() {
   // what's the base condition, if there are no child nodes
   // then the recursive function won't be called
-  console.log(this.value);  
-  if(this.leftChild) {
+  console.log(this.value);
+  if (this.leftChild) {
     this.leftChild.preOrderTraverse();
   }
-  if(this.rightChild) {
+  if (this.rightChild) {
     this.rightChild.preOrderTraverse();
   }
 };
@@ -232,30 +249,29 @@ BSTNode.prototype.preOrderTraverse = function() {
 BSTNode.prototype.postOrderTraverse = function() {
   // what's the base condition, if there are no child nodes
   // then the recursive function won't be called
-  if(this.leftChild) {
+  if (this.leftChild) {
     this.leftChild.postOrderTraverse();
   }
-  if(this.rightChild) {
+  if (this.rightChild) {
     this.rightChild.postOrderTraverse();
   }
-  console.log(this.value);  
+  console.log(this.value);
 };
-
 
 BSTNode.prototype.addNode = function(value) {
   // CONTROL FLOW
   // if value === current value
-    // if yes stop and mark a duplicate
+  // if yes stop and mark a duplicate
   // if value is less than current value
-    // if a right node exists
-      // then let the right node manage this
-    // otherwise if a right node doesnt exist
-      // make a new right node with this value
+  // if a right node exists
+  // then let the right node manage this
+  // otherwise if a right node doesnt exist
+  // make a new right node with this value
   // if value is greater than current value
-    // if a left node exists
-      // then let the left node manage this
-    // otherwise if a left node doesnt exist
-      // make a new left node with this value
+  // if a left node exists
+  // then let the left node manage this
+  // otherwise if a left node doesnt exist
+  // make a new left node with this value
 
   if (this.value === value) {
     ++this.repeat;
@@ -290,7 +306,6 @@ root.addNode(1800);
 root.addNode(15);
 root.addNode(7);
 root.addNode(2);
-
 
 const root2 = new BSTNode(1);
 root2.addNode(120);
