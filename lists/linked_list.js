@@ -86,6 +86,38 @@ LinkedList.prototype.clone = function() {
   }
 };
 
+LinkedList.mergeSortedList = function(list1, list2) {
+  let i = list1.HEAD;
+  let j = list2.HEAD;
+  let newList = new LinkedList();
+  while (i && j) {
+    if (i.value < j.value) {
+      newList.addNode(i.value);
+      i = i.next;
+    } else if (j.value < i.value) {
+      newList.addNode(j.value);
+      j = j.next;
+    } else if (j.value === i.value) {
+      newList.addNode(j.value);
+      newList.addNode(i.value);
+      j = j.next;
+      i = i.next;
+    }
+  }
+
+  while (i) {
+    newList.addNode(i.value);
+    i = i.next;
+  }
+
+  while (j) {
+    newList.addNode(j.value);
+    j = j.next;
+  }
+
+  return newList;
+};
+
 const linkedList = new LinkedList();
 
 linkedList.addNodeSorted(8);
