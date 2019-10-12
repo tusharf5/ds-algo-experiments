@@ -23,7 +23,7 @@
 // check if local is greater than global, yes ✅ global is [0 to 1]  so we update the global to [0 to 2] ✅,
 
 // we move to 50, hecks the condition, 50 > 300 ❌, reset the local to start from [3 to 3] ✅
-// check if local is greater than global, no ❌ global is [0 to 2] (2 length) local is [3 to 3] (0 length), so we dont ❌ update the global 
+// check if local is greater than global, no ❌ global is [0 to 2] (2 length) local is [3 to 3] (0 length), so we dont ❌ update the global
 
 // this way at the end we will have our globalMax with the maximum satisfying value
 
@@ -45,11 +45,33 @@ function maxIncreasingArray(array) {
       localMax[1] = i;
     }
   }
+
   return array.slice(globalMax[0], globalMax[1] + 1);
 }
 
-maxIncreasingArray([100,200,300,50,51,52,53,55,56,30,31,32,33,34,35,1,2,3,4,5,6]);
-
+maxIncreasingArray([
+  100,
+  200,
+  300,
+  50,
+  51,
+  52,
+  53,
+  55,
+  56,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+]);
 
 function longestSubsting(string) {
   const globalLong = [0, 0];
