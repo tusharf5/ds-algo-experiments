@@ -37,4 +37,5 @@ for (let i = 0; i < alien.length - 1; i++) {
 
 let result = '';
 
+// topologically sort map to get answer
 console.log(map);
