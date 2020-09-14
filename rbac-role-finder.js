@@ -1,3 +1,4 @@
+// closest role finder
 const roles = {
   manager: ['a', 'b', 'c'],
   owner: ['a', 'b', 'c', 'd', 'e', 'f'],
