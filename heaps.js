@@ -147,6 +147,36 @@ class MinHeapForObjects {
     }
   }
 
+  modify(id, value) {
+    this.hash[id] = value;
+    this.modified(id);
+  }
+
+  modified(id) {
+    this.delete(id);
+    this.insert({ id });
+  }
+
+  delete(id) {
+    const index = this.heap.findIndex((e) => e === id);
+    const lastLeafNumberIndex = this.heap.length - 1;
+    const lastLeafNumberId = this.heap[lastLeafNumberIndex];
+    const lastLeafNumber = this.getValue(lastLeafNumberId);
+
+    if (!index) {
+      return;
+    }
+
+    // replace this node with the last leaf
+    this.heap[index] = lastLeafNumberId;
+    this.heap[lastLeafNumberIndex] = id;
+
+    // delete last leaf now
+    this.heap.length = this.heap.length - 1;
+    // now we need to do heapify
+    this.compareAndMoveDown(index);
+  }
+
   deleteMin() {
     const rootIndex = 0;
     const rootNumberId = this.heap[rootIndex];
@@ -216,15 +246,21 @@ const hashmap = {
 
 const minheapObj = new MinHeapForObjects(hashmap);
 
-minheapObj.insert({ id: 'qui_cupidatat_aute_fugiat_mollit_dolore_pariatur_et_culpa_magnabc' });
+minheapObj.insert({
+  id: 'qui_cupidatat_aute_fugiat_mollit_dolore_pariatur_et_culpa_magnabc',
+});
 minheapObj.insert({ id: 'temabc' });
 minheapObj.insert({ id: 'veniam_irure_do_sint_abc' });
 minheapObj.insert({ id: 'proident_laboris_elit_in_commodo_fugiat_eu_eabc' });
 minheapObj.insert({ id: 'non_minim_reprehenderit_quis_nabc' });
 minheapObj.insert({ id: 'deserunabc' });
 minheapObj.insert({
-  id: 'occaecat_est_excepteur_dolore_sunt_consequat_consequat_deserunt_anim_lorem_desabc',
+  id:
+    'occaecat_est_excepteur_dolore_sunt_consequat_consequat_deserunt_anim_lorem_desabc',
 });
 minheapObj.insert({ id: 'iabc' });
 minheapObj.insert({ id: 'do_sunt_enim_proident_ullamco_minimabc' });
+minheapObj.log();
+hashmap.temabc = -333;
+minheapObj.modified('temabc');
 minheapObj.log();
